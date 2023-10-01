@@ -3,7 +3,6 @@ package com.myresume.librarymanagementsystem.employee.model;
 import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-
 import java.util.Date;
 
 @Data
