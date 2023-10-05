@@ -29,6 +29,7 @@ public class Member {
     @Digits(integer = 10, fraction = 0, message = "Member National Code must be a number with at most 10 digits")
     private String mem_nationalCode;
 
+    @Digits(integer = 1, fraction = 0, message = "Please just enter one number 1/0")
     private int mem_gender;
     @Past(message = "the input date for Birth Date is not valid! it should belong to past!")
     private Date mem_bod;
@@ -36,8 +37,12 @@ public class Member {
     @Email(message = "the input Email is not valid!")
     private String mem_email;
 
+    @Digits(integer = 12, fraction = 0, message = "The phone nu,ber is not correct!")
     private String mem_mobile;
+
+    @Digits(integer = 1, fraction = 0, message = "Please just enter one number 1/0")
     private int mem_isActive;
+
     private int mem_registrar_id;
 
     /*private String MEM_TEL;
