@@ -1,19 +1,31 @@
 package com.myresume.librarymanagementsystem.book.model;
 
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Data
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table
 public class Book {
+    
     @Id
-    private int BOOK_ID;
-    private final String BOOK_TITLE;
-    private final int BOOK_EDITION;
-    private final double BOOK_PRICE;
-    private final int BOOK_CATEGORY_ID;
-    private final int BOOK_AUTHOR_ID;
-    private final int BOOK_STATUS_ID;
-    private final int BOOK_PUBLISHER_ID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int book_id;
+
+    @NotBlank(message = "Book Title can not be empty!")
+    private String book_title;
+
+    @NotNull(message = "You must enter the borrow state!")
+    private int book_isBorrowed;
+
+    private int book_edition;
+    private int book_category_id;
+    private int book_author_id;
+    private int book_publisher_id;
 }
