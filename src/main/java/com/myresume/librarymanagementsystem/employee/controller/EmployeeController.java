@@ -24,7 +24,7 @@ public class EmployeeController {
 
     @GetMapping(path = "/{emp_id}")
     Employee getEmployee(@PathVariable("emp_id") int id) {
-        return employeeService.getEmployee(id);
+        return employeeService.getEmployeeById(id);
     }
 
     @PostMapping
@@ -40,7 +40,7 @@ public class EmployeeController {
 
     @PutMapping(path = "/update/hiredMode/{emp_id}")
     Employee updateActiveFlagById(@PathVariable("emp_id") int emp_id, @RequestParam int emp_isHired) {
-        Employee employee = employeeService.getEmployee(emp_id);
+        Employee employee = employeeService.getEmployeeById(emp_id);
         employee.setEmp_isHired(emp_isHired);
         employeeService.saveEmployee(employee);
         return employee;
@@ -48,7 +48,7 @@ public class EmployeeController {
 
     @PutMapping(path = "/update/{emp_id}")
     Employee updateEmployeeById(@PathVariable("emp_id") int emp_id, @RequestBody Employee updatedEmployee) {
-        Employee employee = employeeService.getEmployee(emp_id);
+        Employee employee = employeeService.getEmployeeById(emp_id);
         employee.setEmp_email(updatedEmployee.getEmp_email());
         employee.setEmp_mobile(updatedEmployee.getEmp_mobile());
         employeeService.saveEmployee(employee);
