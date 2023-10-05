@@ -1,30 +1,49 @@
 package com.myresume.librarymanagementsystem.member.model;
 
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Data
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table
 public class Member {
 
     @Id
-    private int MEM_ID;
-    private final String MEMB_NAME;
-    private final String MEMB_LASTNAME;
-    private final String MEMB_NATIONALCODE;
-    private int MEMB_GENDER;
-    private Date MEMB_BOD;
-    private String MEMB_EMAIL;
-    private String MEMB_MOBILE;
-    private String MEMB_TEL;
-    private String MEMB_ADDRESS;
-    private Date MEMB_REGISTERED_DATE;
-    private String MEMB_DESCRIPTION;
-    private int MEMB_STATUS_ID;
-    private int MEM_EDUCATION_LEVEL_ID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int mem_id;
 
+    @NotBlank(message = "Name must be not empty!")
+    private String mem_name;
 
+    @NotBlank(message = "Last name must be not empty!")
+    private String mem_lastName;
+
+    @NotBlank(message = "National Code must be not empty!")
+    @Digits(integer = 10, fraction = 0, message = "Member National Code must be a number with at most 10 digits")
+    private String mem_nationalCode;
+
+    private int mem_gender;
+    @Past(message = "the input date for Birth Date is not valid! it should belong to past!")
+    private Date mem_bod;
+
+    @Email(message = "the input Email is not valid!")
+    private String mem_email;
+
+    private String mem_mobile;
+    private int mem_isActive;
+    private int mem_registrar_id;
+
+    /*private String MEM_TEL;
+    private String MEM_ADDRESS;
+    private Date MEM_REGISTERED_DATE;
+    private String MEM_DESCRIPTION;
+    private int MEM_STATUS_ID;
+    private int MEM_EDUCATION_LEVEL_ID;*/
 }
