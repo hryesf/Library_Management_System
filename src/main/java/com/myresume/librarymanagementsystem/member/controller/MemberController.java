@@ -1,5 +1,7 @@
 package com.myresume.librarymanagementsystem.member.controller;
 
+import com.myresume.librarymanagementsystem.employee.service.EmployeeService;
+import com.myresume.librarymanagementsystem.library.service.LibraryService;
 import com.myresume.librarymanagementsystem.member.model.Member;
 import com.myresume.librarymanagementsystem.member.service.MemberService;
 import jakarta.validation.Valid;
@@ -12,9 +14,13 @@ import java.util.List;
 public class MemberController {
 
     final MemberService memberService;
+    final EmployeeService employeeService;
+    final LibraryService libraryService;
 
-    MemberController(MemberService memberService) {
+    public MemberController(MemberService memberService, EmployeeService employeeService, LibraryService libraryService) {
         this.memberService = memberService;
+        this.employeeService = employeeService;
+        this.libraryService = libraryService;
     }
 
     @GetMapping
@@ -30,7 +36,12 @@ public class MemberController {
     @PostMapping
     String saveMember(@Valid @RequestBody Member newMember){
         System.out.println("Post Request ran ...");
-        return memberService.saveMember(newMember).toString() + "\nSaved in database";
+        memberService.saveMember(newMember);
+        String employee_nationalCode = employeeService.getEmployeeById(newMember.getMem_registrar_id()).getEmp_nationalCode();
+        int library_code = libraryService.getLibraryById(employeeService.getEmployeeById(newMember.getMem_registrar_id()).getEmp_library_id()).getLibrary_id();
+        return "the member with national code = " + newMember.getMem_nationalCode()
+                + " by employee with national code = " + employee_nationalCode
+                + " joined in library with code = " + library_code;
     }
 
     @DeleteMapping(path = "/{mem_id}")
