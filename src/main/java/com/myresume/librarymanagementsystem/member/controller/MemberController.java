@@ -13,29 +13,47 @@ public class MemberController {
 
     final MemberService memberService;
 
-    public MemberController(MemberService memberService) {
+    MemberController(MemberService memberService) {
         this.memberService = memberService;
     }
 
     @GetMapping
-    public List<Member> getAllMembers() {
+    List<Member> getAllMembers() {
         return memberService.getAllMembers();
     }
 
     @GetMapping(path = "/{mem_id}")
-    public Member getMember(@PathVariable("mem_id") int id) {
+    Member getMember(@PathVariable("mem_id") int id) {
         return memberService.getMember(id);
     }
 
     @PostMapping
-    public String saveMember(@Valid @RequestBody Member newMember){
+    String saveMember(@Valid @RequestBody Member newMember){
         System.out.println("Post Request ran ...");
         return memberService.saveMember(newMember).toString() + "\nSaved in database";
     }
 
     @DeleteMapping(path = "/{mem_id}")
-    public String deleteMemberById(@PathVariable("mem_id") int mem_id){
+    String deleteMemberById(@PathVariable("mem_id") int mem_id){
         return memberService.deleteMemberById(mem_id);
     }
+
+    @PutMapping(path = "/update/activeMode/{mem_id}")
+    Member updateActiveFlagById(@PathVariable("mem_id") int mem_id,@RequestParam int mem_isActive){
+        Member member = memberService.getMember(mem_id);
+        member.setMem_isActive(mem_isActive);
+        memberService.saveMember(member);
+        return member;
+    }
+
+    @PutMapping(path = "/update/{mem_id}")
+    Member updateMemberById(@PathVariable("mem_id") int mem_id,@RequestBody Member updatedMember){
+        Member member = memberService.getMember(mem_id);
+        member.setMem_email(updatedMember.getMem_email());
+        member.setMem_mobile(updatedMember.getMem_mobile());
+        memberService.saveMember(member);
+        return member;
+    }
+
 
 }
