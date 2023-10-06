@@ -10,22 +10,23 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "Book")
 @Table
 public class Book {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int book_id;
+    @SequenceGenerator(name = "book_id_seq", sequenceName = "book_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_id_seq")
+    private Integer book_id;
 
     @NotBlank(message = "Book Title can not be empty!")
     private String book_title;
 
     @NotNull(message = "You must enter the borrow state!")
-    private int book_isBorrowed;
+    private Integer book_isBorrowed;
 
-    private int book_edition;
-    private int book_category_id;
-    private int book_author_id;
-    private int book_publisher_id;
+    private Integer book_edition;
+    private Integer book_category_id;
+    private Integer book_author_id;
+    private Integer book_publisher_id;
 }
