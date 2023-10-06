@@ -33,6 +33,11 @@ public class MemberController {
         return memberService.getMember(id);
     }
 
+    @GetMapping(path = "/findByNationalCode")
+    Member getMemberByNationalCode(@RequestParam String mem_nationalCode) {
+        return memberService.getMemberByNationalCode(mem_nationalCode);
+    }
+
     @PostMapping
     String saveMember(@Valid @RequestBody Member newMember){
         System.out.println("Post Request ran ...");

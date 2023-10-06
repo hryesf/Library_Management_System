@@ -29,6 +29,11 @@ public class MemberService {
                 .orElseThrow(() -> new NotFoundException("Member with id " + id + " not Found"));
     }
 
+    public Member getMemberByNationalCode(String nationalCode) {
+        return memberRepository.findByNationalCode(nationalCode)
+                .orElseThrow(() -> new NotFoundException("Member with National Code " + nationalCode + " not Found"));
+    }
+
     public String deleteMemberById(int id){
         memberRepository.deleteById(id);
         return "Member with code " + id + " removed from membership";
