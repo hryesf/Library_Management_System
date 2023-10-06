@@ -39,4 +39,9 @@ public class MemberService {
         return "Member with code " + id + " removed from membership";
     }
 
+    public String deleteMemberByNationalCode(String nationalCode){
+        memberRepository.deleteByNationalCode(nationalCode);
+        return "Member with National Code " + nationalCode + " removed from membership";
+    }
+
 }

@@ -39,7 +39,7 @@ public class MemberController {
     }
 
     @PostMapping
-    String saveMember(@Valid @RequestBody Member newMember){
+    String saveMember(@Valid @RequestBody Member newMember) {
         System.out.println("Post Request ran ...");
         memberService.saveMember(newMember);
         String employee_nationalCode = employeeService.getEmployeeById(newMember.getMem_registrar_id()).getEmp_nationalCode();
@@ -50,12 +50,17 @@ public class MemberController {
     }
 
     @DeleteMapping(path = "/{mem_id}")
-    String deleteMemberById(@PathVariable("mem_id") int mem_id){
+    String deleteMemberById(@PathVariable("mem_id") int mem_id) {
         return memberService.deleteMemberById(mem_id);
     }
 
+    @DeleteMapping(path = "/deleteByNationalCode")
+    String deleteMemberById(@RequestParam String mem_nationalCode) {
+        return memberService.deleteMemberByNationalCode(mem_nationalCode);
+    }
+
     @PutMapping(path = "/update/activeMode/{mem_id}")
-    Member updateActiveFlagById(@PathVariable("mem_id") int mem_id,@RequestParam int mem_isActive){
+    Member updateActiveFlagById(@PathVariable("mem_id") int mem_id, @RequestParam int mem_isActive) {
         Member member = memberService.getMember(mem_id);
         member.setMem_isActive(mem_isActive);
         memberService.saveMember(member);
@@ -63,7 +68,7 @@ public class MemberController {
     }
 
     @PutMapping(path = "/update/{mem_id}")
-    Member updateMemberById(@PathVariable("mem_id") int mem_id,@RequestBody Member updatedMember){
+    Member updateMemberById(@PathVariable("mem_id") int mem_id, @RequestBody Member updatedMember) {
         Member member = memberService.getMember(mem_id);
         member.setMem_email(updatedMember.getMem_email());
         member.setMem_mobile(updatedMember.getMem_mobile());
