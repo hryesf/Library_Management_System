@@ -1,7 +1,7 @@
 package com.myresume.librarymanagementsystem.member.service;
 
 import com.myresume.librarymanagementsystem.exception.NotFoundException;
-import com.myresume.librarymanagementsystem.member.model.Member;
+import com.myresume.librarymanagementsystem.member.entity.Member;
 import com.myresume.librarymanagementsystem.member.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +16,8 @@ public class MemberService {
         this.memberRepository = memberRepository;
     }
 
-    public Member saveMember(Member member) {
-        return memberRepository.save(member);
+    public void saveMember(Member member) {
+        memberRepository.save(member);
     }
 
     public List<Member> getAllMembers(){

@@ -1,6 +1,6 @@
 package com.myresume.librarymanagementsystem.member.repository;
 
-import com.myresume.librarymanagementsystem.member.model.Member;
+import com.myresume.librarymanagementsystem.member.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

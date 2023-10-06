@@ -1,6 +1,6 @@
 package com.myresume.librarymanagementsystem.employee.service;
 
-import com.myresume.librarymanagementsystem.employee.model.Employee;
+import com.myresume.librarymanagementsystem.employee.entity.Employee;
 import com.myresume.librarymanagementsystem.employee.repository.EmployeeRepository;
 import com.myresume.librarymanagementsystem.exception.NotFoundException;
 import org.springframework.stereotype.Service;

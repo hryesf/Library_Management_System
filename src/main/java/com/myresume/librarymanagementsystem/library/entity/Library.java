@@ -1,4 +1,4 @@
-package com.myresume.librarymanagementsystem.library.model;
+package com.myresume.librarymanagementsystem.library.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
@@ -15,8 +15,8 @@ import lombok.NoArgsConstructor;
 public class Library {
 
     @Id
-    @SequenceGenerator(initialValue = 100,name = "number")
-    @GeneratedValue(strategy = GenerationType.IDENTITY , generator = "number")
+    @SequenceGenerator(initialValue = 100,name = "library_library_id_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY , generator = "library_library_id_seq")
     int library_id ;
 
     @NotBlank(message = "Library Name must be not empty!")

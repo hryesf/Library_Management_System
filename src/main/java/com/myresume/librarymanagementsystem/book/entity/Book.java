@@ -1,4 +1,4 @@
-package com.myresume.librarymanagementsystem.book.model;
+package com.myresume.librarymanagementsystem.book.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

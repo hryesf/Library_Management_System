@@ -2,7 +2,7 @@ package com.myresume.librarymanagementsystem.member.controller;
 
 import com.myresume.librarymanagementsystem.employee.service.EmployeeService;
 import com.myresume.librarymanagementsystem.library.service.LibraryService;
-import com.myresume.librarymanagementsystem.member.model.Member;
+import com.myresume.librarymanagementsystem.member.entity.Member;
 import com.myresume.librarymanagementsystem.member.service.MemberService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;

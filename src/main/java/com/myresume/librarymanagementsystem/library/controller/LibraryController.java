@@ -1,6 +1,6 @@
 package com.myresume.librarymanagementsystem.library.controller;
 
-import com.myresume.librarymanagementsystem.library.model.Library;
+import com.myresume.librarymanagementsystem.library.entity.Library;
 import com.myresume.librarymanagementsystem.library.service.LibraryService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
