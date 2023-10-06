@@ -10,25 +10,25 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "Library")
 @Table
 public class Library {
 
     @Id
-    @SequenceGenerator(initialValue = 100,name = "library_library_id_seq")
-    @GeneratedValue(strategy = GenerationType.IDENTITY , generator = "library_library_id_seq")
-    int library_id ;
+    @SequenceGenerator(name = "library_id_seq", sequenceName = "library_id_seq", allocationSize = 1, initialValue = 100)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "library_id_seq")
+    private Integer library_id ;
 
     @NotBlank(message = "Library Name must be not empty!")
-    String library_name;
+    private String library_name;
 
     @NotBlank(message = "Library Address must be not empty!")
-    String library_address;
+    private String library_address;
 
     @NotBlank(message = "Region of library  must be not empty!")
-    String library_region;
+    private String library_region;
 
     @NotBlank(message = "Phone Number must be not empty!")
     @Digits(integer = 12, fraction = 0, message = "Please Enter a valid telephone number")
-    String library_tel;
+    private String library_tel;
 }
