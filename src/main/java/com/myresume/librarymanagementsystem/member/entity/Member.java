@@ -1,5 +1,6 @@
 package com.myresume.librarymanagementsystem.member.entity;
 
+import com.myresume.librarymanagementsystem.employee.entity.Employee;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -49,7 +50,9 @@ public class Member {
     @Digits(integer = 1, fraction = 0, message = "Please just enter one number 1/0")
     private Integer mem_isActive;
 
-    private Integer mem_registrar_id;
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "mem_registrar_id", referencedColumnName = "emp_id")
+    private Employee employee;
 
     /*private String MEM_TEL;
     private String MEM_ADDRESS;
