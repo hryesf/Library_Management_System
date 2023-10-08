@@ -1,5 +1,7 @@
 package com.myresume.librarymanagementsystem.employee.entity;
 
+import com.myresume.librarymanagementsystem.gender.entity.Gender;
+import com.myresume.librarymanagementsystem.library.entity.Library;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -31,8 +33,9 @@ public class Employee {
     @Column(columnDefinition = "varchar(20)", unique = true)
     private String emp_nationalCode;
 
-    @Digits(integer = 1, fraction = 0, message = "Please just enter one number 1/0")
-    private Integer emp_gender;
+    @ManyToOne
+    @JoinColumn(name = "emp_gender_id", referencedColumnName = "gender_id")
+    private Gender emp_gender_id;
 
     @Past(message = "the input date for Birth Date is not valid! it should belong to past!")
     private Date emp_bod;
@@ -47,7 +50,9 @@ public class Employee {
     @Digits(integer = 1, fraction = 1, message = "Please just enter one number 1/0")
     private Integer emp_isHired;
 
-    private Integer emp_library_id;
+    @ManyToOne
+    @JoinColumn(name = "emp_library_id", referencedColumnName = "library_id")
+    private Library emp_library_id;
 
     /*private String EMP_TEL;
     private String EMP_ADDRESS;
