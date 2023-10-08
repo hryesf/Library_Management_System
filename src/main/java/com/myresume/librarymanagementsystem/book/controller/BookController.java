@@ -28,7 +28,7 @@ public class BookController {
     }
 
     @PostMapping
-    String saveLibrary(@Valid @RequestBody Book book) {
-        return bookService.saveBook(book).toString() + "\nSaved in database";
+    Book saveBook(@Valid @RequestBody Book book) {
+        return bookService.saveBook(book);
     }
 }
