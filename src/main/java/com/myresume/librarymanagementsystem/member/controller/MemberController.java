@@ -12,8 +12,6 @@ import java.util.List;
 public class MemberController {
 
     final MemberService memberService;
-
-
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
     }
@@ -37,7 +35,7 @@ public class MemberController {
     String saveMember(@Valid @RequestBody Member newMember) {
         memberService.saveMember(newMember);
         String employee_nationalCode = newMember.getEmployee().getEmp_nationalCode();
-        int library_code = newMember.getEmployee().getEmp_library_id();
+        int library_code = newMember.getEmployee().getEmp_library_id().getLibrary_id();
         return "the member with national code = " + newMember.getMem_nationalCode()
                 + " by employee with national code = " + employee_nationalCode
                 + " joined in library with code = " + library_code;
