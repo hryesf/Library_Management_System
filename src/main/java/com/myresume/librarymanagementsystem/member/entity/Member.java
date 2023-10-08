@@ -2,6 +2,8 @@ package com.myresume.librarymanagementsystem.member.entity;
 
 import com.myresume.librarymanagementsystem.employee.entity.Employee;
 import com.myresume.librarymanagementsystem.gender.entity.Gender;
+import com.myresume.librarymanagementsystem.jointables.memberbook.MemberBook;
+import com.myresume.librarymanagementsystem.jointables.memberlibrary.MemberLibrary;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -9,6 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -37,7 +40,7 @@ public class Member {
 
     @ManyToOne
     @JoinColumn(name = "mem_gender_id", referencedColumnName = "gender_id")
-    private Gender mem_gender;
+    private Gender mem_gender_id;
 
     @Past(message = "the input date for Birth Date is not valid! it should belong to past!")
     private Date mem_bod;
@@ -55,6 +58,13 @@ public class Member {
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "mem_registrar_id", referencedColumnName = "emp_id")
     private Employee employee;
+
+
+    @OneToMany(mappedBy = "member")
+    private List<MemberLibrary> memberLibraryList;
+
+    @OneToMany(mappedBy = "member")
+    private List<MemberBook> memberBookList;
 
     /*private String MEM_TEL;
     private String MEM_ADDRESS;
