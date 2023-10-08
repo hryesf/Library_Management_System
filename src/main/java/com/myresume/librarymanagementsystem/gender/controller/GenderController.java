@@ -1,4 +1,4 @@
-package com.myresume.librarymanagementsystem.gender.entity.controller;
+package com.myresume.librarymanagementsystem.gender.controller;
 
 import com.myresume.librarymanagementsystem.gender.entity.Gender;
 import com.myresume.librarymanagementsystem.gender.service.GenderService;
@@ -23,13 +23,13 @@ public class GenderController {
         return genderService.getAllGenders();
     }
 
-    /*@PostMapping
+    @PostMapping(path = "/singlePost")
     String saveGender(@Valid @RequestBody Gender gender) {
         genderService.saveGender(gender);
         return "Entity saved successfully";
-    }*/
+    }
 
-    @PostMapping
+    @PostMapping(path = "/groupPost")
     public ResponseEntity<String> saveGenders(@Valid @RequestBody List<Gender> genders) {
         genderService.saveGenders(genders);
         return ResponseEntity.ok("Entities saved successfully");

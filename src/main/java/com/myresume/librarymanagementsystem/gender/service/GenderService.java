@@ -14,9 +14,9 @@ public class GenderService {
         this.genderRepository = genderRepository;
     }
 
-    /*public void saveGender(Gender gender) {
+    public void saveGender(Gender gender) {
         genderRepository.save(gender);
-    }*/
+    }
     public void saveGenders(List<Gender> genders) {
         genderRepository.saveAll(genders);
     }
