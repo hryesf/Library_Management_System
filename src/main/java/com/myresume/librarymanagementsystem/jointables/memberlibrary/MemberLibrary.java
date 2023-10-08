@@ -21,12 +21,14 @@ public class MemberLibrary {
 
     @ManyToOne
     @MapsId("memberId")
-    @JoinColumn(name = "memlib_member_id")
+    @JoinColumn(name = "memlib_member_id",
+            foreignKey = @ForeignKey( name = "member_library_member_id_fk"))
     private Member member;
 
     @ManyToOne
     @MapsId("libraryId")
-    @JoinColumn(name = "memlib_library_id")
+    @JoinColumn(name = "memlib_library_id",
+            foreignKey = @ForeignKey( name = "member_library_library_id_fk"))
     private Library library;
 
     private Date memlib_signUpDate;

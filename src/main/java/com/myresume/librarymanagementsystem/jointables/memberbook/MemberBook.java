@@ -21,12 +21,14 @@ public class MemberBook {
 
     @ManyToOne
     @MapsId("memberId")
-    @JoinColumn(name = "membook_member_id")
+    @JoinColumn(name = "membook_member_id",
+            foreignKey = @ForeignKey( name = "member_book_member_id_fk"))
     private Member member;
 
     @ManyToOne
     @MapsId("bookId")
-    @JoinColumn(name = "membook_book_id")
+    @JoinColumn(name = "membook_book_id",
+            foreignKey = @ForeignKey( name = "member_book_book_id_fk"))
     private Book book;
 
     private Date membook_borrowDate;

@@ -39,7 +39,8 @@ public class Member {
     private String mem_nationalCode;
 
     @ManyToOne
-    @JoinColumn(name = "mem_gender_id", referencedColumnName = "gender_id")
+    @JoinColumn(name = "mem_gender_id", referencedColumnName = "gender_id",
+            foreignKey = @ForeignKey( name = "member_gender_id_fk"))
     private Gender mem_gender_id;
 
     @Past(message = "the input date for Birth Date is not valid! it should belong to past!")
@@ -56,7 +57,8 @@ public class Member {
     private Integer mem_isActive;
 
     @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "mem_registrar_id", referencedColumnName = "emp_id")
+    @JoinColumn(name = "mem_registrar_id", referencedColumnName = "emp_id",
+            foreignKey = @ForeignKey( name = "member_employee_id_fk"))
     private Employee employee;
 
 

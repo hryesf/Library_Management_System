@@ -21,12 +21,14 @@ public class LibraryBook {
 
     @ManyToOne
     @MapsId("bookId")
-    @JoinColumn(name = "libbook_book_id")
+    @JoinColumn(name = "libbook_book_id",
+            foreignKey = @ForeignKey( name = "library_book_book_id_fk"))
     private Book book;
 
     @ManyToOne
     @MapsId("libraryId")
-    @JoinColumn(name = "libbook_library_id")
+    @JoinColumn(name = "libbook_library_id",
+            foreignKey = @ForeignKey( name = "library_book_library_id_fk"))
     private Library library;
 
     private Date libbook_donateDate;

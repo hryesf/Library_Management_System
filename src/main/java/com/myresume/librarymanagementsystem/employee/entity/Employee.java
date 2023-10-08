@@ -34,7 +34,8 @@ public class Employee {
     private String emp_nationalCode;
 
     @ManyToOne
-    @JoinColumn(name = "emp_gender_id", referencedColumnName = "gender_id")
+    @JoinColumn(name = "emp_gender_id", referencedColumnName = "gender_id",
+            foreignKey = @ForeignKey( name = "employee_gender_id_fk"))
     private Gender emp_gender_id;
 
     @Past(message = "the input date for Birth Date is not valid! it should belong to past!")
@@ -51,7 +52,8 @@ public class Employee {
     private Integer emp_isHired;
 
     @ManyToOne
-    @JoinColumn(name = "emp_library_id", referencedColumnName = "library_id")
+    @JoinColumn(name = "emp_library_id", referencedColumnName = "library_id",
+            foreignKey = @ForeignKey( name = "employee_library_id_fk"))
     private Library emp_library_id;
 
     /*private String EMP_TEL;

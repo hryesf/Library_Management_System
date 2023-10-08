@@ -35,15 +35,18 @@ public class Book {
     private Integer book_edition;
 
     @ManyToOne
-    @JoinColumn(name = "book_author_id", referencedColumnName = "boauth_id")
+    @JoinColumn(name = "book_author_id", referencedColumnName = "boauth_id",
+            foreignKey = @ForeignKey( name = "book_author_id_fk"))
     private BookAuthor book_author_id;
 
     @ManyToOne
-    @JoinColumn(name = "book_category_id", referencedColumnName = "bocat_id")
+    @JoinColumn(name = "book_category_id", referencedColumnName = "bocat_id",
+            foreignKey = @ForeignKey( name = "book_category_id_fk"))
     private BookCategory book_category_id;
 
     @ManyToOne
-    @JoinColumn(name = "book_publisher_id", referencedColumnName = "bopub_id")
+    @JoinColumn(name = "book_publisher_id", referencedColumnName = "bopub_id",
+            foreignKey = @ForeignKey( name = "book_publisher_id_fk"))
     private BookPublisher book_publisher_id;
 
     @OneToMany(mappedBy = "book")
