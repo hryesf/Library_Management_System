@@ -1,11 +1,15 @@
 package com.myresume.librarymanagementsystem.library.entity;
 
+import com.myresume.librarymanagementsystem.jointables.librarybook.LibraryBook;
+import com.myresume.librarymanagementsystem.jointables.memberlibrary.MemberLibrary;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -31,4 +35,10 @@ public class Library {
     @NotBlank(message = "Phone Number must be not empty!")
     @Digits(integer = 12, fraction = 0, message = "Please Enter a valid telephone number")
     private String library_tel;
+
+    @OneToMany(mappedBy = "library")
+    private List<MemberLibrary> memberLibraryList;
+
+    @OneToMany(mappedBy = "library")
+    private List<LibraryBook> libraryBookList;
 }
