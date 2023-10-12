@@ -33,7 +33,8 @@ public class MemberController {
 
     @PostMapping
     String saveMember(@Valid @RequestBody Member newMember) {
-        memberService.saveMember(newMember);
+//        memberService.saveMember(newMember);
+        memberService.registrationNewMember(newMember);
         String employee_nationalCode = newMember.getEmployee().getEmp_nationalCode();
         int library_code = newMember.getEmployee().getEmp_library_id().getLibrary_id();
         return "the member with national code = " + newMember.getMem_nationalCode()
