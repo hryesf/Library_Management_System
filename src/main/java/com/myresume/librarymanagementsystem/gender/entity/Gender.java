@@ -21,4 +21,8 @@ public class Gender {
     @NotBlank(message = "Name must be not empty!")
     @Column(columnDefinition = "varchar(10) default 'unknown'")
     private String gender_name;
+
+    public Gender(String gender_name) {
+        this.gender_name = gender_name;
+    }
 }
