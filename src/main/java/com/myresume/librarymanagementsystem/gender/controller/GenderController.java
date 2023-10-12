@@ -24,9 +24,9 @@ public class GenderController {
     }
 
     @PostMapping(path = "/singlePost")
-    String saveGender(@Valid @RequestBody Gender gender) {
+    Gender saveGender(@Valid @RequestBody Gender gender) {
         genderService.saveGender(gender);
-        return "Entity saved successfully";
+        return gender;
     }
 
     @PostMapping(path = "/groupPost")
