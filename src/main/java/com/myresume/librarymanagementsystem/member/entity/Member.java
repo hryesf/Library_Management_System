@@ -30,15 +30,15 @@ public class Member {
     private String mem_name;
 
     @NotBlank(message = "Last name must be not empty!")
-    @Column(columnDefinition = "varchar(50) default 'unknown'")
+    @Column(columnDefinition = "varchar(50) default 'unknown'", nullable = false)
     private String mem_lastName;
 
     @NotBlank(message = "National Code must be not empty!")
     @Digits(integer = 10, fraction = 0, message = "Member National Code must be a number with at most 10 digits")
-    @Column(columnDefinition = "varchar(20)", unique = true)
+    @Column(columnDefinition = "varchar(20)", unique = true, nullable = false)
     private String mem_nationalCode;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "mem_gender_id", referencedColumnName = "gender_id",
             foreignKey = @ForeignKey( name = "member_gender_id_fk"))
     private Gender mem_gender_id;
@@ -67,6 +67,17 @@ public class Member {
 
     @OneToMany(mappedBy = "member")
     private List<MemberBook> memberBookList;
+
+    public Member(String mem_name, String mem_lastName, String mem_nationalCode, Gender mem_gender_id, String mem_email, Integer mem_isActive) {
+        this.mem_name = mem_name;
+        this.mem_lastName = mem_lastName;
+        this.mem_nationalCode = mem_nationalCode;
+        this.mem_gender_id = mem_gender_id;
+        this.mem_email = mem_email;
+        this.mem_isActive = mem_isActive;
+    }
+
+
 
     /*private String MEM_TEL;
     private String MEM_ADDRESS;
