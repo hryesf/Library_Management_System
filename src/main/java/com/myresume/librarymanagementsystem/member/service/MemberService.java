@@ -6,6 +6,7 @@ import com.myresume.librarymanagementsystem.member.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MemberService {
@@ -43,5 +44,19 @@ public class MemberService {
         memberRepository.deleteByNationalCode(nationalCode);
         return "Member with National Code " + nationalCode + " removed from membership";
     }
+
+    public void registrationNewMember(Member member){
+        
+        String nationalCode = member.getMem_nationalCode();
+        Optional<Member> memberOptional = memberRepository.findByNationalCode(nationalCode);
+        if (memberOptional.isPresent()){
+            if (memberOptional.get().getMem_lastName().equals(member.getMem_lastName())){
+                return;
+            }
+            throw new IllegalStateException("National Code [" + nationalCode + "] is taken");
+        }
+        memberRepository.save(member);
+    }
+
 
 }
