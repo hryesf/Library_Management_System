@@ -1,15 +1,17 @@
 package com.myresume.librarymanagementsystem.library.entity;
 
-import com.myresume.librarymanagementsystem.jointables.librarybook.LibraryBook;
-import com.myresume.librarymanagementsystem.jointables.memberlibrary.MemberLibrary;
+import com.myresume.librarymanagementsystem.jointables.donatedbook.entity.DonatedBook;
+import com.myresume.librarymanagementsystem.jointables.membership.entity.Membership;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.NaturalId;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -23,6 +25,7 @@ public class Library {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "library_id_seq")
     private Integer library_id ;
 
+    @NaturalId
     @NotBlank(message = "Library Name must be not empty!")
     private String library_name;
 
@@ -36,9 +39,9 @@ public class Library {
     @Digits(integer = 12, fraction = 0, message = "Please Enter a valid telephone number")
     private String library_tel;
 
-    @OneToMany(mappedBy = "library")
-    private List<MemberLibrary> memberLibraryList;
+    @OneToMany(mappedBy = "library", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Membership> membershipList = new HashSet<>();
 
-    @OneToMany(mappedBy = "library")
-    private List<LibraryBook> libraryBookList;
+    @OneToMany(mappedBy = "library", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<DonatedBook> donatedBookList = new HashSet<>();
 }
