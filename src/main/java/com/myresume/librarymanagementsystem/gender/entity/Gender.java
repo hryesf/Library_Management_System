@@ -2,11 +2,11 @@ package com.myresume.librarymanagementsystem.gender.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -14,8 +14,7 @@ import lombok.NoArgsConstructor;
 public class Gender {
 
     @Id
-    @SequenceGenerator(name = "gender_id_sequence", sequenceName = "gender_id_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gender_id_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer gender_id;
 
     @NotBlank(message = "Name must be not empty!")
