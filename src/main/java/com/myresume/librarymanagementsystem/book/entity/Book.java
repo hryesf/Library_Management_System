@@ -1,31 +1,34 @@
 package com.myresume.librarymanagementsystem.book.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.myresume.librarymanagementsystem.bookauthor.entity.BookAuthor;
 import com.myresume.librarymanagementsystem.bookcategory.entity.BookCategory;
 import com.myresume.librarymanagementsystem.bookpublisher.entity.BookPublisher;
 import com.myresume.librarymanagementsystem.jointables.borrowedbook.entity.BorrowedBook;
-import com.myresume.librarymanagementsystem.jointables.donatedbook.entity.DonatedBook;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "Book")
 @Table
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Book {
     
     @Id
-    @SequenceGenerator(name = "book_id_seq", sequenceName = "book_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_id_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer book_id;
 
     @NaturalId
@@ -53,10 +56,13 @@ public class Book {
     private BookPublisher book_publisher_id;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<DonatedBook> donatedBookList = new HashSet<>();
+    @JsonIgnoreProperties("book")
+    private Set<BorrowedBook> borrowedBooks = new HashSet<>();
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<BorrowedBook> borrowedBookList = new HashSet<>();
+    public Book(String book_title, Integer book_isBorrowed) {
+        this.book_title = book_title;
+        this.book_isBorrowed = book_isBorrowed;
+    }
 
     @Override
     public String toString() {
@@ -65,12 +71,7 @@ public class Book {
                 ", book_title='" + book_title + '\'' +
                 ", book_isBorrowed=" + book_isBorrowed +
                 ", book_edition=" + book_edition +
-                ", book_author_id=" + book_author_id +
-                ", book_category_id=" + book_category_id +
-                ", book_publisher_id=" + book_publisher_id +
-                ", donatedBookList=" + donatedBookList +
-                /*", borrowedBookList=" + borrowedBookList +*/
-                ", borrowedBookList=" + (borrowedBookList != null ? borrowedBookList.size() : 0) +
+                ", borrowedBooks=" + borrowedBooks.toString() +
                 '}';
     }
 }
