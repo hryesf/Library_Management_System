@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class BorrowedBookService {
@@ -29,33 +28,24 @@ public class BorrowedBookService {
         return borrowedBookRepository.findAll();
     }
 
-    public BorrowedBook borrowBook(BorrowedBookId borrowedBookId) {
+    public BorrowedBook borrowBook(Integer memberId, Integer bookId) {
 
-        Integer bookId = borrowedBookId.getBookId();
-        Integer memberId = borrowedBookId.getMemberId();
         Book book = bookRepository.findById(bookId).orElseThrow();
         Member member = memberRepository.findById(memberId).orElseThrow();
 
-        // Check if the borrowed book already exists
-        Optional<BorrowedBook> existingBorrowedBook = borrowedBookRepository.findById(borrowedBookId);
+        BorrowedBook borrowedBook = new BorrowedBook(
+                new BorrowedBookId(memberId, bookId), member, book, LocalDate.now()
+        );
 
-        if (existingBorrowedBook.isPresent()) {
-            throw new IllegalStateException("The book \"" + book + "\" is already taken by \"" + member + "\"");
-        } else {
-            // Create a new borrowed book
-            BorrowedBook borrowedBook = new BorrowedBook(member, book, LocalDate.now());
-            member.getBorrowedBookList().add(borrowedBook);
-            book.getBorrowedBookList().add(borrowedBook); // stackoverflow error !
-
-            return borrowedBookRepository.save(borrowedBook);
-        }
+        return borrowedBookRepository.save(borrowedBook);
     }
+
 
     public void returnBook(BorrowedBookId borrowedBookId) {
         BorrowedBook borrowedBook = borrowedBookRepository.findById(borrowedBookId).orElseThrow();
 
-        borrowedBook.getMember().getBorrowedBookList().remove(borrowedBook);
-        borrowedBook.getBook().getBorrowedBookList().remove(borrowedBook);
+        borrowedBook.getMember().getBorrowedBooks().remove(borrowedBook);
+        borrowedBook.getBook().getBorrowedBooks().remove(borrowedBook);
 
         borrowedBookRepository.delete(borrowedBook);
     }
