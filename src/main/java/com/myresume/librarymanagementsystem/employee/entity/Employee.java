@@ -4,20 +4,20 @@ import com.myresume.librarymanagementsystem.gender.entity.Gender;
 import com.myresume.librarymanagementsystem.library.entity.Library;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "Employee")
 @Table
 public class Employee {
     @Id
-    @SequenceGenerator(name = "employee_id_seq", sequenceName = "employee_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_id_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer emp_id;
 
     @NotBlank(message = "Name must be not empty!")
