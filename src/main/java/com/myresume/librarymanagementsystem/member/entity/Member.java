@@ -1,31 +1,35 @@
 package com.myresume.librarymanagementsystem.member.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.myresume.librarymanagementsystem.employee.entity.Employee;
 import com.myresume.librarymanagementsystem.gender.entity.Gender;
 import com.myresume.librarymanagementsystem.jointables.borrowedbook.entity.BorrowedBook;
-import com.myresume.librarymanagementsystem.jointables.membership.entity.Membership;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
 
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "Member")
 @Table
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Member {
 
     @Id
-    @SequenceGenerator(name = "member_id_sequence", sequenceName = "member_id_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "member_id_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer mem_id;
 
     @NotBlank(message = "Name must be not empty!")
@@ -65,12 +69,9 @@ public class Member {
             foreignKey = @ForeignKey( name = "member_employee_id_fk"))
     private Employee employee;
 
-
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Membership> membershipList = new HashSet<>();
-
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<BorrowedBook> borrowedBookList = new HashSet<>();
+    @JsonIgnoreProperties("member")
+    private Set<BorrowedBook> borrowedBooks = new HashSet<>();
 
     public Member(String mem_name, String mem_lastName, String mem_nationalCode, Gender mem_gender_id, String mem_email, Integer mem_isActive) {
         this.mem_name = mem_name;
@@ -88,15 +89,13 @@ public class Member {
                 ", mem_name='" + mem_name + '\'' +
                 ", mem_lastName='" + mem_lastName + '\'' +
                 ", mem_nationalCode='" + mem_nationalCode + '\'' +
-                ", mem_gender_id=" + mem_gender_id +
+                ", mem_gender_id=" + mem_gender_id.getGender_id() +
                 ", mem_bod=" + mem_bod +
                 ", mem_email='" + mem_email + '\'' +
                 ", mem_mobile='" + mem_mobile + '\'' +
                 ", mem_isActive=" + mem_isActive +
-                ", employee=" + employee +
-                ", membershipList=" + membershipList +
-                //", borrowedBookList=" + borrowedBookList +
-                ", borrowedBookList=" + (borrowedBookList != null ? borrowedBookList.size() : 0) +
+                ", employee=" + employee.getEmp_id() +
+                ", borrowedBooks=" + borrowedBooks.toString() +
                 '}';
     }
 
