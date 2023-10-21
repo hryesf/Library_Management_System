@@ -2,11 +2,12 @@ package com.myresume.librarymanagementsystem.bookauthor.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+//@Data
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -14,8 +15,7 @@ import lombok.NoArgsConstructor;
 public class BookAuthor {
 
     @Id
-    @SequenceGenerator(name = "boauth_id_sequence", sequenceName = "boauth_id_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "boauth_id_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer boauth_id;
 
     @NotBlank(message = "Name must be not empty!")
