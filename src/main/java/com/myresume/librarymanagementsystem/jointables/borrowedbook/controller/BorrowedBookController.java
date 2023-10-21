@@ -21,9 +21,9 @@ public class BorrowedBookController {
         return borrowedBookService.getAllBorrowedBooks();
     }
 
-    @PostMapping
-    public BorrowedBook borrowBook(@RequestBody BorrowedBookId borrowedBookId) {
-        return borrowedBookService.borrowBook(borrowedBookId);
+    @PostMapping("/{member_id}/{book_id}")
+    public BorrowedBook borrowBook(@PathVariable Integer member_id , @PathVariable Integer book_id) {
+        return borrowedBookService.borrowBook(member_id, book_id);
     }
 
     @DeleteMapping("/{id}")
