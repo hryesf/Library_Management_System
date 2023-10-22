@@ -5,6 +5,7 @@ import com.myresume.librarymanagementsystem.bookauthor.entity.BookAuthor;
 import com.myresume.librarymanagementsystem.bookcategory.entity.BookCategory;
 import com.myresume.librarymanagementsystem.bookpublisher.entity.BookPublisher;
 import com.myresume.librarymanagementsystem.jointables.borrowedbook.entity.BorrowedBook;
+import com.myresume.librarymanagementsystem.jointables.donatedbook.entity.DonatedBook;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -59,6 +60,10 @@ public class Book {
     @JsonIgnoreProperties("book")
     private Set<BorrowedBook> borrowedBooks = new HashSet<>();
 
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("book")
+    private Set<DonatedBook> donatedBooks = new HashSet<>();
+
     public Book(String book_title, Integer book_isBorrowed) {
         this.book_title = book_title;
         this.book_isBorrowed = book_isBorrowed;
@@ -71,7 +76,11 @@ public class Book {
                 ", book_title='" + book_title + '\'' +
                 ", book_isBorrowed=" + book_isBorrowed +
                 ", book_edition=" + book_edition +
+                ", book_author_id=" + book_author_id.getBoauth_name() +
+                ", book_category_id=" + book_category_id.getBocat_name() +
+                ", book_publisher_id=" + book_publisher_id.getBopub_name() +
                 ", borrowedBooks=" + borrowedBooks.toString() +
+                ", donatedBooks=" + donatedBooks.toString() +
                 '}';
     }
 }
