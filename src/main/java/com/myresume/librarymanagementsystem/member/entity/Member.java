@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.myresume.librarymanagementsystem.employee.entity.Employee;
 import com.myresume.librarymanagementsystem.gender.entity.Gender;
 import com.myresume.librarymanagementsystem.jointables.borrowedbook.entity.BorrowedBook;
+import com.myresume.librarymanagementsystem.jointables.membership.entity.Membership;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Email;
@@ -73,6 +74,10 @@ public class Member {
     @JsonIgnoreProperties("member")
     private Set<BorrowedBook> borrowedBooks = new HashSet<>();
 
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("member")
+    private Set<Membership> membershipList = new HashSet<>();
+
     public Member(String mem_name, String mem_lastName, String mem_nationalCode, Gender mem_gender_id, String mem_email, Integer mem_isActive) {
         this.mem_name = mem_name;
         this.mem_lastName = mem_lastName;
@@ -96,6 +101,7 @@ public class Member {
                 ", mem_isActive=" + mem_isActive +
                 ", employee=" + employee.getEmp_id() +
                 ", borrowedBooks=" + borrowedBooks.toString() +
+                ", membershipList=" + membershipList.toString() +
                 '}';
     }
 
