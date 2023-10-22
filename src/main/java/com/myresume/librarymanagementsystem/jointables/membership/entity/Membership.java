@@ -38,13 +38,6 @@ public class Membership {
 
     private LocalDate memlib_signUpDate;
 
-    public Membership(Member member, Library library, LocalDate memlib_signUpDate) {
-        this.id = new MembershipId(member.getMem_id(), library.getLibrary_id());
-        this.member = member;
-        this.library = library;
-        this.memlib_signUpDate = memlib_signUpDate;
-    }
-
     @Override
     public String toString() {
         return "Membership{" +
