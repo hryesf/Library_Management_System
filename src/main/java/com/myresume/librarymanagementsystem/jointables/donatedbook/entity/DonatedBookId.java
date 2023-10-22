@@ -1,4 +1,4 @@
-package com.myresume.librarymanagementsystem.jointables.librarybook;
+package com.myresume.librarymanagementsystem.jointables.donatedbook.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -12,7 +12,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-public class LibraryBookId implements Serializable {
+public class DonatedBookId implements Serializable {
 
     @Column(name = "libbook_book_id")
     private Integer bookId;
