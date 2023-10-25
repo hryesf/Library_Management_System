@@ -23,7 +23,7 @@ public class LibraryController {
     }
 
     @GetMapping(path = "/{library_id}")
-    Library getLibraryById(@PathVariable("library_id") int id) {
+    Library getLibraryById(@PathVariable("library_id") Long id) {
         return libraryService.getLibraryById(id);
     }
 
@@ -33,7 +33,7 @@ public class LibraryController {
     }
 
     @DeleteMapping(path = "/{library_id}")
-    String deleteLibraryById(@PathVariable("library_id") int id){
+    String deleteLibraryById(@PathVariable("library_id") Long id){
         return libraryService.deleteLibraryById(id);
     }
 }

@@ -9,19 +9,21 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table
+@Entity(name = "Gender")
+@Table(name = "gender")
 public class Gender {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer gender_id;
+    @Column(name = "gender_id")
+    private Long genderId;
 
     @NotBlank(message = "Name must be not empty!")
-    @Column(columnDefinition = "varchar(10) default 'unknown'")
-    private String gender_name;
+    @Column(name = "gender_name",
+            columnDefinition = "varchar(10) default 'unknown'")
+    private String genderName;
 
-    public Gender(String gender_name) {
-        this.gender_name = gender_name;
+    public Gender(String genderName) {
+        this.genderName = genderName;
     }
 }

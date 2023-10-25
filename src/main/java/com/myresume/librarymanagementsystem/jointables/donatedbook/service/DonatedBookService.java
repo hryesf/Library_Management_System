@@ -30,7 +30,7 @@ public class DonatedBookService {
         return donatedBookRepository.findAll();
     }
 
-    public DonatedBook donateBook(Integer libraryId, Integer bookId) {
+    public DonatedBook donateBook(Long libraryId, Long bookId) {
 
         Book book = bookRepository.findById(bookId).orElseThrow();
         Library library = libraryRepository.findById(libraryId).orElseThrow();

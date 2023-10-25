@@ -19,7 +19,7 @@ public class LibraryService {
         return libraryRepository.findAll();
     }
 
-    public Library getLibraryById(int id) {
+    public Library getLibraryById(Long id) {
         return libraryRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Member with id " + id + " not Found"));
     }
@@ -28,7 +28,7 @@ public class LibraryService {
         return libraryRepository.save(library);
     }
 
-    public String deleteLibraryById(int id){
+    public String deleteLibraryById(Long id){
         libraryRepository.deleteById(id);
         return "Library with code id = " + id + " removed!";
     }

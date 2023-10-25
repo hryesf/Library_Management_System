@@ -20,7 +20,7 @@ public class BookService {
         return bookRepository.findAll();
     }
 
-    public Book getBookById(int id) {
+    public Book getBookById(Long id) {
         return bookRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Member with id " + id + " not Found"));
     }

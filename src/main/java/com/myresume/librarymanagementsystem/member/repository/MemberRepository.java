@@ -11,13 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-public interface MemberRepository extends JpaRepository<Member, Integer> {
+public interface MemberRepository extends JpaRepository<Member, Long> {
 
-    @Query("SELECT m FROM Member m WHERE m.mem_nationalCode = :nationalCode")
+    @Query("SELECT m FROM Member m WHERE m.memberNationalCode = :nationalCode")
     Optional<Member> findByNationalCode(@Param("nationalCode") String nationalCode);
 
     @Transactional
     @Modifying
-    @Query("DELETE FROM Member m WHERE m.mem_nationalCode = :nationalCode")
+    @Query("DELETE FROM Member m WHERE m.memberNationalCode = :nationalCode")
     void deleteByNationalCode(@Param("nationalCode") String nationalCode);
 }

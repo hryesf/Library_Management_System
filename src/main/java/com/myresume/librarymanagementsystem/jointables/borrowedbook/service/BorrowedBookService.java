@@ -28,7 +28,7 @@ public class BorrowedBookService {
         return borrowedBookRepository.findAll();
     }
 
-    public BorrowedBook borrowBook(Integer memberId, Integer bookId) {
+    public BorrowedBook borrowBook(Long memberId, Long bookId) {
 
         Book book = bookRepository.findById(bookId).orElseThrow();
         Member member = memberRepository.findById(memberId).orElseThrow();
@@ -44,8 +44,8 @@ public class BorrowedBookService {
     public void returnBook(BorrowedBookId borrowedBookId) {
         BorrowedBook borrowedBook = borrowedBookRepository.findById(borrowedBookId).orElseThrow();
 
-        borrowedBook.getMember().getBorrowedBooks().remove(borrowedBook);
-        borrowedBook.getBook().getBorrowedBooks().remove(borrowedBook);
+        borrowedBook.getMember().getBorrowedBookList().remove(borrowedBook);
+        borrowedBook.getBook().getBorrowedBookList().remove(borrowedBook);
 
         borrowedBookRepository.delete(borrowedBook);
     }

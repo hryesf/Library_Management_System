@@ -22,7 +22,7 @@ public class BorrowedBookController {
     }
 
     @PostMapping("/{member_id}/{book_id}")
-    public BorrowedBook borrowBook(@PathVariable Integer member_id , @PathVariable Integer book_id) {
+    public BorrowedBook borrowBook(@PathVariable Long member_id , @PathVariable Long book_id) {
         return borrowedBookService.borrowBook(member_id, book_id);
     }
 

@@ -20,7 +20,7 @@ public class DonatedBookController {
     }
 
     @PostMapping("/{book_id}/{library_id}")
-    public String startMembership(@PathVariable Integer book_id , @PathVariable Integer library_id) {
+    public String startMembership(@PathVariable Long book_id , @PathVariable Long library_id) {
         DonatedBook donatedBook = donatedBookService.donateBook(book_id, library_id);
         return donatedBook.toString();
     }

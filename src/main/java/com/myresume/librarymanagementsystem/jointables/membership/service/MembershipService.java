@@ -29,7 +29,7 @@ public class MembershipService {
         return membershipRepository.findAll();
     }
 
-    public Membership startMembership(Integer memberId, Integer libraryId) {
+    public Membership startMembership(Long memberId, Long libraryId) {
 
         Library library = libraryRepository.findById(libraryId).orElseThrow();
         Member member = memberRepository.findById(memberId).orElseThrow();

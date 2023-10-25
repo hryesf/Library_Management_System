@@ -25,90 +25,121 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "Member")
-@Table
+@Table(name = "member")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer mem_id;
+    @Column(name = "member_id")
+    private Long memberId;
 
     @NotBlank(message = "Name must be not empty!")
-    @Column(columnDefinition = "varchar(20) default 'unknown'")
-    private String mem_name;
+    @Column(name = "member_name",
+            columnDefinition = "varchar(20) default 'unknown'")
+    private String memberName;
 
     @NotBlank(message = "Last name must be not empty!")
-    @Column(columnDefinition = "varchar(50) default 'unknown'", nullable = false)
-    private String mem_lastName;
+    @Column(name = "member_last_name",
+            columnDefinition = "varchar(50) default 'unknown'",
+            nullable = false)
+    private String memberLastName;
 
     @NaturalId
     @NotBlank(message = "National Code must be not empty!")
-    @Digits(integer = 10, fraction = 0, message = "Member National Code must be a number with at most 10 digits")
-    @Column(columnDefinition = "varchar(20)", unique = true, nullable = false)
-    private String mem_nationalCode;
+    @Digits(integer = 10,
+            fraction = 0,
+            message = "Member National Code must be a number with at most 10 digits")
+    @Column(name = "member_national_code",
+            columnDefinition = "varchar(10)",
+            unique = true,
+            nullable = false)
+    private String memberNationalCode;
 
     @ManyToOne
-    @JoinColumn(name = "mem_gender_id", referencedColumnName = "gender_id",
+    @JoinColumn(name = "member_gender_id",
+            referencedColumnName = "gender_id",
             foreignKey = @ForeignKey( name = "member_gender_id_fk"))
-    private Gender mem_gender_id;
+    private Gender memberGenderId;
 
     @Past(message = "the input date for Birth Date is not valid! it should belong to past!")
-    private Date mem_bod;
+    @Column(name = "member_bod")
+    private Date memberBOD;
 
     @Email(message = "the input Email is not valid!")
-    @Column(columnDefinition = "varchar(50)", unique = true)
-    private String mem_email;
+    @Column(name = "member_email",
+            columnDefinition = "varchar(50)",
+            unique = true)
+    private String memberEmail;
 
-    @Digits(integer = 12, fraction = 0, message = "The phone nu,ber is not correct!")
-    private String mem_mobile;
+    @Digits(integer = 12,
+            fraction = 0,
+            message = "The phone nu,ber is not correct!")
+    @Column(name = "member_mobile",
+            columnDefinition = "varchar(20)")
+    private String memberMobile;
 
-    @Digits(integer = 1, fraction = 0, message = "Please just enter one number 1/0")
-    private Integer mem_isActive;
+    @Digits(integer = 1,
+            fraction = 0,
+            message = "Please just enter one number 1/0")
+    @Column(name = "member_is_active",
+            columnDefinition = "varchar(20)")
+    private Integer memberIsActive;
 
     @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "mem_registrar_id", referencedColumnName = "emp_id",
+    @JoinColumn(name = "member_registrar_id",
+            referencedColumnName = "employee_id",
             foreignKey = @ForeignKey( name = "member_employee_id_fk"))
     private Employee employee;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "member",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     @JsonIgnoreProperties("member")
-    private Set<BorrowedBook> borrowedBooks = new HashSet<>();
+    private Set<BorrowedBook> borrowedBookList = new HashSet<>();
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "member",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     @JsonIgnoreProperties("member")
     private Set<Membership> membershipList = new HashSet<>();
 
-    public Member(String mem_name, String mem_lastName, String mem_nationalCode, Gender mem_gender_id, String mem_email, Integer mem_isActive) {
-        this.mem_name = mem_name;
-        this.mem_lastName = mem_lastName;
-        this.mem_nationalCode = mem_nationalCode;
-        this.mem_gender_id = mem_gender_id;
-        this.mem_email = mem_email;
-        this.mem_isActive = mem_isActive;
+    public Member(String memberName,
+                  String memberLastName,
+                  String memberNationalCode,
+                  Gender memberGenderId,
+                  String memberEmail,
+                  Integer memberIsActive) {
+        this.memberName = memberName;
+        this.memberLastName = memberLastName;
+        this.memberNationalCode = memberNationalCode;
+        this.memberGenderId = memberGenderId;
+        this.memberEmail = memberEmail;
+        this.memberIsActive = memberIsActive;
     }
 
     @Override
     public String toString() {
         return "Member{" +
-                "mem_id=" + mem_id +
-                ", mem_name='" + mem_name + '\'' +
-                ", mem_lastName='" + mem_lastName + '\'' +
-                ", mem_nationalCode='" + mem_nationalCode + '\'' +
-                ", mem_gender_id=" + mem_gender_id.getGender_id() +
-                ", mem_bod=" + mem_bod +
-                ", mem_email='" + mem_email + '\'' +
-                ", mem_mobile='" + mem_mobile + '\'' +
-                ", mem_isActive=" + mem_isActive +
-                ", employee=" + employee.getEmp_id() +
-                ", borrowedBooks=" + borrowedBooks.toString() +
+                "memberId=" + memberId +
+                ", memberName='" + memberName + '\'' +
+                ", memberLastName='" + memberLastName + '\'' +
+                ", memberNationalCode='" + memberNationalCode + '\'' +
+                ", memberGender=" + memberGenderId.getGenderName() +
+                ", memberBOD=" + memberBOD +
+                ", memberEmail='" + memberEmail + '\'' +
+                ", memberMobile='" + memberMobile + '\'' +
+                ", memberIsActive=" + memberIsActive +
+                ", employee=" + employee.getEmployeeName() +
+                ", borrowedBookList=" + borrowedBookList.toString() +
                 ", membershipList=" + membershipList.toString() +
                 '}';
     }
 
-    /*private String MEM_TEL;
-    private String MEM_ADDRESS;
-    private Date MEM_REGISTERED_DATE;
-    private String MEM_DESCRIPTION;
-    private Integer MEM_STATUS_ID;
-    private Integer MEM_EDUCATION_LEVEL_ID;*/
+    /*private String memberTel;
+    private String memberAddress;
+    private Date memberRegisteredDate;
+    private String memberDescription;
+    private Integer memberStatusId;
+    private Integer memberEducationLevelId;*/
 }

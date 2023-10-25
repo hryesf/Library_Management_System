@@ -1,9 +1,9 @@
 package com.myresume.librarymanagementsystem.book.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.myresume.librarymanagementsystem.bookauthor.entity.BookAuthor;
-import com.myresume.librarymanagementsystem.bookcategory.entity.BookCategory;
-import com.myresume.librarymanagementsystem.bookpublisher.entity.BookPublisher;
+import com.myresume.librarymanagementsystem.author.entity.Author;
+import com.myresume.librarymanagementsystem.category.entity.Category;
+import com.myresume.librarymanagementsystem.publisher.entity.Publisher;
 import com.myresume.librarymanagementsystem.jointables.borrowedbook.entity.BorrowedBook;
 import com.myresume.librarymanagementsystem.jointables.donatedbook.entity.DonatedBook;
 import jakarta.persistence.*;
@@ -24,63 +24,75 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "Book")
-@Table
+@Table(name = "book")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Book {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer book_id;
+    @Column(name = "book_id")
+    private Long bookId;
 
     @NaturalId
     @NotBlank(message = "Book Title can not be empty!")
-    private String book_title;
+    @Column(name = "book_title",
+            columnDefinition = "varchar(20)")
+    private String bookTitle;
 
     @NotNull(message = "You must enter the borrow state!")
-    private Integer book_isBorrowed;
+    @Column(name = "book_is_borrowed")
+    private Integer bookIsBorrowed;
 
-    private Integer book_edition;
+    @Column(name = "book_edition")
+    private Integer bookEdition;
 
     @ManyToOne
-    @JoinColumn(name = "book_author_id", referencedColumnName = "boauth_id",
+    @JoinColumn(name = "book_author_id",
+            referencedColumnName = "author_id",
             foreignKey = @ForeignKey( name = "book_author_id_fk"))
-    private BookAuthor book_author_id;
+    private Author author;
 
     @ManyToOne
-    @JoinColumn(name = "book_category_id", referencedColumnName = "bocat_id",
+    @JoinColumn(name = "book_category_id",
+            referencedColumnName = "category_id",
             foreignKey = @ForeignKey( name = "book_category_id_fk"))
-    private BookCategory book_category_id;
+    private Category category;
 
     @ManyToOne
-    @JoinColumn(name = "book_publisher_id", referencedColumnName = "bopub_id",
+    @JoinColumn(name = "book_publisher_id",
+            referencedColumnName = "publisher_id",
             foreignKey = @ForeignKey( name = "book_publisher_id_fk"))
-    private BookPublisher book_publisher_id;
+    private Publisher publisher;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "book",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     @JsonIgnoreProperties("book")
-    private Set<BorrowedBook> borrowedBooks = new HashSet<>();
+    private Set<BorrowedBook> borrowedBookList = new HashSet<>();
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "book",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     @JsonIgnoreProperties("book")
-    private Set<DonatedBook> donatedBooks = new HashSet<>();
+    private Set<DonatedBook> donatedBookList = new HashSet<>();
 
-    public Book(String book_title, Integer book_isBorrowed) {
-        this.book_title = book_title;
-        this.book_isBorrowed = book_isBorrowed;
+    public Book(String bookTitle, Integer bookIsBorrowed) {
+        this.bookTitle = bookTitle;
+        this.bookIsBorrowed = bookIsBorrowed;
     }
 
     @Override
     public String toString() {
         return "Book{" +
-                "book_id=" + book_id +
-                ", book_title='" + book_title + '\'' +
-                ", book_isBorrowed=" + book_isBorrowed +
-                ", book_edition=" + book_edition +
-                ", book_author_id=" + book_author_id.getBoauth_name() +
-                ", book_category_id=" + book_category_id.getBocat_name() +
-                ", book_publisher_id=" + book_publisher_id.getBopub_name() +
-                ", borrowedBooks=" + borrowedBooks.toString() +
-                ", donatedBooks=" + donatedBooks.toString() +
+                "Id=" + bookId +
+                ", Title='" + bookTitle + '\'' +
+                ", IsBorrowed=" + bookIsBorrowed +
+                ", Edition=" + bookEdition +
+                ", AuthorName=" + author.getAuthorName() +
+                ", CategoryName=" + category.getCategoryName() +
+                ", PublisherName=" + publisher.getPublisherName() +
+                ", borrowedBooks=" + borrowedBookList.toString() +
+                ", donatedBooks=" + donatedBookList.toString() +
                 '}';
     }
 }

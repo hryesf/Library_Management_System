@@ -15,8 +15,8 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table
+@Entity(name = "Membership")
+@Table(name = "membership")
 public class Membership {
 
     @EmbeddedId
@@ -24,27 +24,27 @@ public class Membership {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("memberId")
-    @JoinColumn(name = "memlib_member_id",
-            foreignKey = @ForeignKey( name = "member_library_member_id_fk"))
+    @JoinColumn(name = "member_id",
+            foreignKey = @ForeignKey( name = "membership_member_id_fk"))
     @JsonIgnoreProperties("membershipList")
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("libraryId")
-    @JoinColumn(name = "memlib_library_id",
-            foreignKey = @ForeignKey( name = "member_library_library_id_fk"))
+    @JoinColumn(name = "library_id",
+            foreignKey = @ForeignKey( name = "membership_library_id_fk"))
     @JsonIgnoreProperties("membershipList")
     private Library library;
 
-    private LocalDate memlib_signUpDate;
+    private LocalDate signUpDate;
 
     @Override
     public String toString() {
         return "Membership{" +
                 "id=" + id +
-                ", member=" + member.getMem_name() +
-                ", library=" + library.getLibrary_name() +
-                ", memlib_signUpDate=" + memlib_signUpDate +
+                ", member=" + member.getMemberName() +
+                ", library=" + library.getLibraryName() +
+                ", signUpDate=" + signUpDate +
                 '}';
     }
 }

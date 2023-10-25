@@ -24,12 +24,12 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public Employee getEmployeeById(int id) {
+    public Employee getEmployeeById(Long id) {
         return employeeRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("employee with id " + id + " not Found"));
     }
 
-    public String deleteEmployeeById(int id) {
+    public String deleteEmployeeById(Long id) {
         employeeRepository.deleteById(id);
         return "employee with code " + id + " removed";
     }

@@ -22,8 +22,8 @@ public class EmployeeController {
         return employeeService.getAllEmployees();
     }
 
-    @GetMapping(path = "/{emp_id}")
-    Employee getEmployee(@PathVariable("emp_id") int id) {
+    @GetMapping(path = "/{employee_id}")
+    Employee getEmployee(@PathVariable("employee_id") Long id) {
         return employeeService.getEmployeeById(id);
     }
 
@@ -33,24 +33,24 @@ public class EmployeeController {
         return employeeService.saveEmployee(newEmployee).toString() + "\nSaved in database";
     }
 
-    @DeleteMapping(path = "/{emp_id}")
-    String deleteEmployeeById(@PathVariable("emp_id") int emp_id) {
+    @DeleteMapping(path = "/{employee_id}")
+    String deleteEmployeeById(@PathVariable("employee_id") Long emp_id) {
         return employeeService.deleteEmployeeById(emp_id);
     }
 
-    @PutMapping(path = "/update/hiredMode/{emp_id}")
-    Employee updateActiveFlagById(@PathVariable("emp_id") int emp_id, @RequestParam int emp_isHired) {
-        Employee employee = employeeService.getEmployeeById(emp_id);
-        employee.setEmp_isHired(emp_isHired);
+    @PutMapping(path = "/update/hiredMode/{employee_id}")
+    Employee updateActiveFlagById(@PathVariable("employee_id") Long employee_id, @RequestParam int employee_isHired) {
+        Employee employee = employeeService.getEmployeeById(employee_id);
+        employee.setEmployeeIsHired(employee_isHired);
         employeeService.saveEmployee(employee);
         return employee;
     }
 
-    @PutMapping(path = "/update/{emp_id}")
-    Employee updateEmployeeById(@PathVariable("emp_id") int emp_id, @RequestBody Employee updatedEmployee) {
-        Employee employee = employeeService.getEmployeeById(emp_id);
-        employee.setEmp_email(updatedEmployee.getEmp_email());
-        employee.setEmp_mobile(updatedEmployee.getEmp_mobile());
+    @PutMapping(path = "/update/{employee_id}")
+    Employee updateEmployeeById(@PathVariable("employee_id") Long employee_id, @RequestBody Employee updatedEmployee) {
+        Employee employee = employeeService.getEmployeeById(employee_id);
+        employee.setEmployeeEmail(updatedEmployee.getEmployeeEmail());
+        employee.setEmployeeMobile(updatedEmployee.getEmployeeMobile());
         employeeService.saveEmployee(employee);
         return employee;
     }

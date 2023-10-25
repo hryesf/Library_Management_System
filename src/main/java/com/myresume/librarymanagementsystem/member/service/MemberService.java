@@ -25,7 +25,7 @@ public class MemberService {
         return memberRepository.findAll();
     }
 
-    public Member getMember(int id) {
+    public Member getMember(Long id) {
         return memberRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Member with id " + id + " not Found"));
     }
@@ -35,7 +35,7 @@ public class MemberService {
                 .orElseThrow(() -> new NotFoundException("Member with National Code " + nationalCode + " not Found"));
     }
 
-    public String deleteMemberById(int id){
+    public String deleteMemberById(Long id){
         memberRepository.deleteById(id);
         return "Member with code " + id + " removed from membership";
     }
@@ -47,10 +47,10 @@ public class MemberService {
 
     public void registrationNewMember(Member member){
         
-        String nationalCode = member.getMem_nationalCode();
+        String nationalCode = member.getMemberNationalCode();
         Optional<Member> memberOptional = memberRepository.findByNationalCode(nationalCode);
         if (memberOptional.isPresent()){
-            if (memberOptional.get().getMem_lastName().equals(member.getMem_lastName())){
+            if (memberOptional.get().getMemberLastName().equals(member.getMemberLastName())){
                 return;
             }
             throw new IllegalStateException("National Code [" + nationalCode + "] is taken");

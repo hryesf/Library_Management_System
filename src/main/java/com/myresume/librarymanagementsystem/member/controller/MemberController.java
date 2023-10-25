@@ -21,50 +21,50 @@ public class MemberController {
         return memberService.getAllMembers();
     }
 
-    @GetMapping(path = "/{mem_id}")
-    Member getMember(@PathVariable("mem_id") int id) {
+    @GetMapping(path = "/{member_id}")
+    Member getMember(@PathVariable("member_id") Long id) {
         return memberService.getMember(id);
     }
 
     @GetMapping(path = "/findByNationalCode")
-    Member getMemberByNationalCode(@RequestParam String mem_nationalCode) {
-        return memberService.getMemberByNationalCode(mem_nationalCode);
+    Member getMemberByNationalCode(@RequestParam String member_nationalCode) {
+        return memberService.getMemberByNationalCode(member_nationalCode);
     }
 
     @PostMapping
     String saveMember(@Valid @RequestBody Member newMember) {
 //        memberService.saveMember(newMember);
         memberService.registrationNewMember(newMember);
-        String employee_nationalCode = newMember.getEmployee().getEmp_nationalCode();
-        int library_code = newMember.getEmployee().getEmp_library_id().getLibrary_id();
-        return "the member with national code = " + newMember.getMem_nationalCode()
+        String employee_nationalCode = newMember.getEmployee().getEmployeeNationalCode();
+        Long library_code = newMember.getEmployee().getEmployeeLibraryId().getLibraryId();
+        return "the member with national code = " + newMember.getMemberNationalCode()
                 + " by employee with national code = " + employee_nationalCode
                 + " joined in library with code = " + library_code;
     }
 
-    @DeleteMapping(path = "/{mem_id}")
-    String deleteMemberById(@PathVariable("mem_id") int mem_id) {
-        return memberService.deleteMemberById(mem_id);
+    @DeleteMapping(path = "/{member_id}")
+    String deleteMemberById(@PathVariable("member_id") Long member_id) {
+        return memberService.deleteMemberById(member_id);
     }
 
     @DeleteMapping(path = "/deleteByNationalCode")
-    String deleteMemberById(@RequestParam String mem_nationalCode) {
-        return memberService.deleteMemberByNationalCode(mem_nationalCode);
+    String deleteMemberById(@RequestParam String member_nationalCode) {
+        return memberService.deleteMemberByNationalCode(member_nationalCode);
     }
 
-    @PutMapping(path = "/update/activeMode/{mem_id}")
-    Member updateActiveFlagById(@PathVariable("mem_id") int mem_id, @RequestParam int mem_isActive) {
-        Member member = memberService.getMember(mem_id);
-        member.setMem_isActive(mem_isActive);
+    @PutMapping(path = "/update/activeMode/{member_id}")
+    Member updateActiveFlagById(@PathVariable("member_id") Long member_id, @RequestParam int member_isActive) {
+        Member member = memberService.getMember(member_id);
+        member.setMemberIsActive(member_isActive);
         memberService.saveMember(member);
         return member;
     }
 
-    @PutMapping(path = "/update/{mem_id}")
-    Member updateMemberById(@PathVariable("mem_id") int mem_id, @RequestBody Member updatedMember) {
-        Member member = memberService.getMember(mem_id);
-        member.setMem_email(updatedMember.getMem_email());
-        member.setMem_mobile(updatedMember.getMem_mobile());
+    @PutMapping(path = "/update/{member_id}")
+    Member updateMemberById(@PathVariable("member_id") Long member_id, @RequestBody Member updatedMember) {
+        Member member = memberService.getMember(member_id);
+        member.setMemberEmail(updatedMember.getMemberEmail());
+        member.setMemberMobile(updatedMember.getMemberMobile());
         memberService.saveMember(member);
         return member;
     }

@@ -7,14 +7,13 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table
+@Entity(name = "DonatedBook")
+@Table(name = "donated_book")
 public class DonatedBook {
 
     @EmbeddedId
@@ -22,27 +21,28 @@ public class DonatedBook {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("bookId")
-    @JoinColumn(name = "libbook_book_id",
-            foreignKey = @ForeignKey( name = "library_book_book_id_fk"))
-    @JsonIgnoreProperties("donatedBooks")
+    @JoinColumn(name = "book_id",
+            foreignKey = @ForeignKey( name = "donated_book_book_id_fk"))
+    @JsonIgnoreProperties("donatedBookList")
     private Book book;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("libraryId")
-    @JoinColumn(name = "libbook_library_id",
-            foreignKey = @ForeignKey( name = "library_book_library_id_fk"))
-    @JsonIgnoreProperties("donatedBooks")
+    @JoinColumn(name = "library_id",
+            foreignKey = @ForeignKey( name = "donated_book_library_id_fk"))
+    @JsonIgnoreProperties("donatedBookList")
     private Library library;
 
-    private LocalDate libbook_donateDate;
+    @Column(name = "donate_date")
+    private LocalDate DonateDate;
 
     @Override
     public String toString() {
         return "DonatedBook{" +
                 "id=" + id +
-                ", book=" + book.getBook_title() +
-                ", library=" + library.getLibrary_name() +
-                ", libbook_donateDate=" + libbook_donateDate +
+                ", book=" + book.getBookTitle() +
+                ", library=" + library.getLibraryName() +
+                ", DonateDate=" + DonateDate +
                 '}';
     }
 }

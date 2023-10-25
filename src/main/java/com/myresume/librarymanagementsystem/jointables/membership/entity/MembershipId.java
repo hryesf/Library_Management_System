@@ -1,6 +1,5 @@
 package com.myresume.librarymanagementsystem.jointables.membership.entity;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,9 +13,6 @@ import java.io.Serializable;
 @Embeddable
 public class MembershipId implements Serializable {
 
-    @Column(name = "memlib_member_id")
-    private Integer memberId;
-
-    @Column(name = "memlib_library_id")
-    private Integer libraryId;
+    private Long memberId;
+    private Long libraryId;
 }

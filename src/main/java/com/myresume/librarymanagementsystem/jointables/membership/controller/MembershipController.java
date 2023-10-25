@@ -21,7 +21,7 @@ public class MembershipController {
     }
 
     @PostMapping("/{member_id}/{library_id}")
-    public String startMembership(@PathVariable Integer member_id , @PathVariable Integer library_id) {
+    public String startMembership(@PathVariable Long member_id , @PathVariable Long library_id) {
         Membership membership = membershipService.startMembership(member_id, library_id);
         return membership.toString();
     }
