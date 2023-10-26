@@ -5,8 +5,6 @@ import com.myresume.librarymanagementsystem.library.service.LibraryService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping(path = "api/v1/libraries")
 public class LibraryController {
@@ -18,13 +16,13 @@ public class LibraryController {
     }
 
     @GetMapping
-    List<Library> getLibraries() {
-        return libraryService.getLibraries();
+    String getLibraries() {
+        return libraryService.getLibraries().toString();
     }
 
     @GetMapping(path = "/{library_id}")
-    Library getLibraryById(@PathVariable("library_id") Long id) {
-        return libraryService.getLibraryById(id);
+    String getLibraryById(@PathVariable("library_id") Long id) {
+        return libraryService.getLibraryById(id).toString();
     }
 
     @PostMapping
