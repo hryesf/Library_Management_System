@@ -5,8 +5,6 @@ import com.myresume.librarymanagementsystem.jointables.borrowedbook.entity.Borro
 import com.myresume.librarymanagementsystem.jointables.borrowedbook.service.BorrowedBookService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/v1/borrowed-books")
 public class BorrowedBookController {
@@ -17,8 +15,8 @@ public class BorrowedBookController {
     }
 
     @GetMapping
-    public List<BorrowedBook> getAllBorrowedBooks() {
-        return borrowedBookService.getAllBorrowedBooks();
+    public String getAllBorrowedBooks() {
+        return borrowedBookService.getAllBorrowedBooks().toString();
     }
 
     @PostMapping("/{member_id}/{book_id}")
