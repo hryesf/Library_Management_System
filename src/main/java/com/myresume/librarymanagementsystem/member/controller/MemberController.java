@@ -5,8 +5,6 @@ import com.myresume.librarymanagementsystem.member.service.MemberService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping(path = "api/v1/members")
 public class MemberController {
@@ -17,13 +15,13 @@ public class MemberController {
     }
 
     @GetMapping
-    List<Member> getAllMembers() {
-        return memberService.getAllMembers();
+    String getAllMembers() {
+        return memberService.getAllMembers().toString();
     }
 
     @GetMapping(path = "/{member_id}")
-    Member getMember(@PathVariable("member_id") Long id) {
-        return memberService.getMember(id);
+    String getMember(@PathVariable("member_id") Long id) {
+        return memberService.getMember(id).toString();
     }
 
     @GetMapping(path = "/findByNationalCode")
