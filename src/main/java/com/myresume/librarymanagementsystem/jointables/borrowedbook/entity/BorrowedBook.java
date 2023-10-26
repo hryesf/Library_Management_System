@@ -1,6 +1,5 @@
 package com.myresume.librarymanagementsystem.jointables.borrowedbook.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.myresume.librarymanagementsystem.book.entity.Book;
 import com.myresume.librarymanagementsystem.member.entity.Member;
 import jakarta.persistence.*;
@@ -23,14 +22,12 @@ public class BorrowedBook {
     @MapsId("memberId")
     @JoinColumn(name = "member_id",
             foreignKey = @ForeignKey( name = "borrowed_book_member_id_fk"))
-    @JsonIgnoreProperties("borrowedBooks")
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("bookId")
     @JoinColumn(name = "book_id",
             foreignKey = @ForeignKey( name = "borrowed_book_book_id_fk"))
-    @JsonIgnoreProperties("borrowedBooks")
     private Book book;
 
     private LocalDate borrowDate;
