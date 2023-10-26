@@ -1,6 +1,5 @@
 package com.myresume.librarymanagementsystem.member.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.myresume.librarymanagementsystem.employee.entity.Employee;
 import com.myresume.librarymanagementsystem.gender.entity.Gender;
 import com.myresume.librarymanagementsystem.jointables.borrowedbook.entity.BorrowedBook;
@@ -26,7 +25,6 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity(name = "Member")
 @Table(name = "member")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Member {
 
     @Id
@@ -95,13 +93,11 @@ public class Member {
     @OneToMany(mappedBy = "member",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    @JsonIgnoreProperties("member")
     private Set<BorrowedBook> borrowedBookList = new HashSet<>();
 
     @OneToMany(mappedBy = "member",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    @JsonIgnoreProperties("member")
     private Set<Membership> membershipList = new HashSet<>();
 
     public Member(String memberName,
