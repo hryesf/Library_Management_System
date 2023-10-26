@@ -4,7 +4,6 @@ import com.myresume.librarymanagementsystem.employee.entity.Employee;
 import com.myresume.librarymanagementsystem.employee.service.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 
 @RestController
@@ -18,13 +17,13 @@ public class EmployeeController {
     }
 
     @GetMapping
-    List<Employee> getAllEmployees() {
-        return employeeService.getAllEmployees();
+    String getAllEmployees() {
+        return employeeService.getAllEmployees().toString();
     }
 
     @GetMapping(path = "/{employee_id}")
-    Employee getEmployee(@PathVariable("employee_id") Long id) {
-        return employeeService.getEmployeeById(id);
+    String getEmployee(@PathVariable("employee_id") Long id) {
+        return employeeService.getEmployeeById(id).toString();
     }
 
     @PostMapping
