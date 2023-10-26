@@ -10,7 +10,6 @@ import java.util.Date;
 
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "Employee")
@@ -74,6 +73,21 @@ public class Employee {
             referencedColumnName = "library_id",
             foreignKey = @ForeignKey( name = "employee_library_id_fk"))
     private Library employeeLibraryId;
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "employeeName='" + employeeName + '\'' +
+                ", employeeLastName='" + employeeLastName + '\'' +
+                ", employeeNationalCode='" + employeeNationalCode + '\'' +
+                ", employeeGenderId=" + employeeGenderId.getGenderName() +
+                ", employeeBOD=" + employeeBOD +
+                ", employeeEmail='" + employeeEmail + '\'' +
+                ", employeeMobile='" + employeeMobile + '\'' +
+                ", employeeIsHired=" + employeeIsHired.toString() +
+                ", employeeLibraryId=" + employeeLibraryId.toString() +
+                '}';
+    }
 
     /*private String employee_TEL;
     private String employee_ADDRESS;
