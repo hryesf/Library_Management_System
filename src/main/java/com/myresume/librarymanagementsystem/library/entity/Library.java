@@ -1,15 +1,11 @@
 package com.myresume.librarymanagementsystem.library.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.myresume.librarymanagementsystem.jointables.donatedbook.entity.DonatedBook;
 import com.myresume.librarymanagementsystem.jointables.membership.entity.Membership;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.NaturalId;
 
 import java.util.HashSet;
@@ -22,7 +18,6 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity(name = "Library")
 @Table(name = "library")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Library {
 
     @Id
@@ -57,13 +52,11 @@ public class Library {
     @OneToMany(mappedBy = "library",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    @JsonIgnoreProperties("library")
     private Set<Membership> membershipList = new HashSet<>();
 
     @OneToMany(mappedBy = "library",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    @JsonIgnoreProperties("library")
     private Set<DonatedBook> donatedBookList = new HashSet<>();
 
     @Override
