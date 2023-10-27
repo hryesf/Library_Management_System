@@ -11,23 +11,26 @@ import java.util.Optional;
 @Service
 public class MemberService {
 
-    final MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
+    private final MemberConverter memberConverter;
 
-    public MemberService(MemberRepository memberRepository) {
+    public MemberService(MemberRepository memberRepository, MemberConverter memberConverter) {
         this.memberRepository = memberRepository;
+        this.memberConverter = memberConverter;
     }
 
-    public void saveMember(Member member) {
+    public MemberDTO saveMember(Member member) {
         memberRepository.save(member);
+        return memberConverter.toDto(member);
     }
 
-    public List<Member> getAllMembers(){
-        return memberRepository.findAll();
+    public List<MemberDTO> getAllMembers(){
+        return memberConverter.MemberDTOList(memberRepository.findAll());
     }
 
-    public Member getMember(Long id) {
-        return memberRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Member with id " + id + " not Found"));
+    public MemberDTO getMember(Long id) {
+        return memberConverter.toDto(memberRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Member with id " + id + " not Found")));
     }
 
     public Member getMemberByNationalCode(String nationalCode) {
