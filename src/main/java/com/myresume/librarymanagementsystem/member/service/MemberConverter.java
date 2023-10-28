@@ -19,8 +19,8 @@ public class MemberConverter {
         return dto;
     }
 
-    public List<MemberDTO> MemberDTOList (List<Member> customerList){
-        return customerList.stream().map(this::toDto).collect(Collectors.toList());
+    public List<MemberDTO> MemberDTOList (List<Member> memberList){
+        return memberList.stream().map(this::toDto).collect(Collectors.toList());
     }
 
     public Member toEntity(MemberDTO dto) {
@@ -32,7 +32,5 @@ public class MemberConverter {
 
         return member;
     }
-
-
 
 }
