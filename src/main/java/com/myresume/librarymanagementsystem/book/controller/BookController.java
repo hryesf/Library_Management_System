@@ -1,6 +1,7 @@
 package com.myresume.librarymanagementsystem.book.controller;
 
 import com.myresume.librarymanagementsystem.book.entity.Book;
+import com.myresume.librarymanagementsystem.book.service.BookDTO;
 import com.myresume.librarymanagementsystem.book.service.BookService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ public class BookController {
     }
 
     @PostMapping
-    Book saveBook(@Valid @RequestBody Book book) {
+    BookDTO saveBook(@Valid @RequestBody Book book) {
         return bookService.saveBook(book);
     }
 }

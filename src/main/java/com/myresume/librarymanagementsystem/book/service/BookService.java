@@ -10,23 +10,24 @@ import java.util.List;
 @Service
 public class BookService {
 
-    final BookRepository bookRepository;
-
-    public BookService(BookRepository bookRepository) {
+    private final BookRepository bookRepository;
+    private final BookConverter bookConverter;
+    public BookService(BookRepository bookRepository, BookConverter bookConverter) {
         this.bookRepository = bookRepository;
+        this.bookConverter = bookConverter;
     }
 
-    public List<Book> getBooks() {
-        return bookRepository.findAll();
+    public List<BookDTO> getBooks() {
+        return bookConverter.BookDTOList(bookRepository.findAll());
     }
 
-    public Book getBookById(Long id) {
-        return bookRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Member with id " + id + " not Found"));
+    public BookDTO getBookById(Long id) {
+        return bookConverter.toDto(bookRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Member with id " + id + " not Found")));
     }
 
-    public Book saveBook(Book book){
-        return bookRepository.save(book);
+    public BookDTO saveBook(Book book){
+        return bookConverter.toDto(bookRepository.save(book));
     }
     
 
