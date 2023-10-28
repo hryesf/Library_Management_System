@@ -1,6 +1,7 @@
 package com.myresume.librarymanagementsystem.employee.controller;
 
 import com.myresume.librarymanagementsystem.employee.entity.Employee;
+import com.myresume.librarymanagementsystem.employee.service.EmployeeConverter;
 import com.myresume.librarymanagementsystem.employee.service.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -10,10 +11,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "api/v1/employees")
 public class EmployeeController {
 
-    final EmployeeService employeeService;
+    private final EmployeeService employeeService;
+    private final EmployeeConverter employeeConverter;
 
-    EmployeeController(EmployeeService employeeService) {
+
+    EmployeeController(EmployeeService employeeService, EmployeeConverter employeeConverter) {
         this.employeeService = employeeService;
+        this.employeeConverter = employeeConverter;
     }
 
     @GetMapping
@@ -39,7 +43,7 @@ public class EmployeeController {
 
     @PutMapping(path = "/update/hiredMode/{employee_id}")
     Employee updateActiveFlagById(@PathVariable("employee_id") Long employee_id, @RequestParam int employee_isHired) {
-        Employee employee = employeeService.getEmployeeById(employee_id);
+        Employee employee = employeeConverter.toEntity(employeeService.getEmployeeById(employee_id));
         employee.setEmployeeIsHired(employee_isHired);
         employeeService.saveEmployee(employee);
         return employee;
@@ -47,7 +51,7 @@ public class EmployeeController {
 
     @PutMapping(path = "/update/{employee_id}")
     Employee updateEmployeeById(@PathVariable("employee_id") Long employee_id, @RequestBody Employee updatedEmployee) {
-        Employee employee = employeeService.getEmployeeById(employee_id);
+        Employee employee = employeeConverter.toEntity(employeeService.getEmployeeById(employee_id));
         employee.setEmployeeEmail(updatedEmployee.getEmployeeEmail());
         employee.setEmployeeMobile(updatedEmployee.getEmployeeMobile());
         employeeService.saveEmployee(employee);

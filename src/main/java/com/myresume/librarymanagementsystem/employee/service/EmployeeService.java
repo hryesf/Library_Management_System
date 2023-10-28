@@ -10,23 +10,25 @@ import java.util.List;
 @Service
 public class EmployeeService {
 
-    final EmployeeRepository employeeRepository;
+    private final EmployeeRepository employeeRepository;
+    private final EmployeeConverter employeeConverter;
 
-    public EmployeeService(EmployeeRepository employeeRepository) {
+    public EmployeeService(EmployeeRepository employeeRepository, EmployeeConverter employeeConverter) {
         this.employeeRepository = employeeRepository;
+        this.employeeConverter = employeeConverter;
     }
 
-    public Employee saveEmployee(Employee employee) {
-        return employeeRepository.save(employee);
+    public EmployeeDTO saveEmployee(Employee employee) {
+        return employeeConverter.toDto(employeeRepository.save(employee));
     }
 
-    public List<Employee> getAllEmployees() {
-        return employeeRepository.findAll();
+    public List<EmployeeDTO> getAllEmployees() {
+        return employeeConverter.EmployeeDTOList(employeeRepository.findAll());
     }
 
-    public Employee getEmployeeById(Long id) {
-        return employeeRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("employee with id " + id + " not Found"));
+    public EmployeeDTO getEmployeeById(Long id) {
+        return employeeConverter.toDto(employeeRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("employee with id " + id + " not Found")));
     }
 
     public String deleteEmployeeById(Long id) {
