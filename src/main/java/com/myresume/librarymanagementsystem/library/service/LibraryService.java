@@ -10,22 +10,24 @@ import java.util.List;
 @Service
 public class LibraryService {
     private final LibraryRepository libraryRepository;
+    private final LibraryConverter libraryConverter;
 
-    public LibraryService(LibraryRepository libraryRepository) {
+    public LibraryService(LibraryRepository libraryRepository, LibraryConverter libraryConverter) {
         this.libraryRepository = libraryRepository;
+        this.libraryConverter = libraryConverter;
     }
 
-    public List<Library> getLibraries() {
-        return libraryRepository.findAll();
+    public List<LibraryDTO> getLibraries() {
+        return libraryConverter.libraryDTOList(libraryRepository.findAll());
     }
 
-    public Library getLibraryById(Long id) {
-        return libraryRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Member with id " + id + " not Found"));
+    public LibraryDTO getLibraryById(Long id) {
+        return libraryConverter.toDto(libraryRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Member with id " + id + " not Found")));
     }
 
-    public Library saveLibrary(Library library){
-        return libraryRepository.save(library);
+    public LibraryDTO saveLibrary(Library library){
+        return libraryConverter.toDto(libraryRepository.save(library));
     }
 
     public String deleteLibraryById(Long id){
