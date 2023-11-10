@@ -21,7 +21,7 @@ We have three main entities in this system includes : Book, Library, Member, Emp
   - Spring boot
   - Spring Web
   - Spring Data JPA (Hibernate)
-- PostgrSQL as a database for system
+- PostgreSQL as a database for system
 
 ## Getting Started
 1. Clone the repository: `git clone https://github.com/your-username/library-management-system.git`
