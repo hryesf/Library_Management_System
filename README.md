@@ -2,7 +2,7 @@
 
 ## Description
 A library management system built with Java and the Spring framework.
-We have three main entities in this system includes : Book, Library, Member, Employee
+We have four main entities in this system includes : Book, Library, Member, Employee
 
 ## ERD diagram
 ![](images/library_system_ERD_diagram.png)
