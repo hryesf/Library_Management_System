@@ -21,6 +21,7 @@ We have three main entities in this system includes : Book, Library, Member, Emp
   - Spring boot
   - Spring Web
   - Spring Data JPA (Hibernate)
+  - Spring Security (working on it ...)
 - PostgreSQL as a database for system
 
 ## Getting Started
