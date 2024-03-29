@@ -47,7 +47,7 @@ class MemberRepositoryTest {
     }
 
     @Test
-    void itNotShouldSelectMemberByNationalCodeWhenCodeDoesNotExists() {
+    void itNotShouldSelectMemberByNationalCodeWhenNationalCodeDoesNotExists() {
         // Given
         String nationalCode = "0062498125";
 
