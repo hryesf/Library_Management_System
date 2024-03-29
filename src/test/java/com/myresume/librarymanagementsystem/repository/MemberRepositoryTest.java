@@ -1,4 +1,4 @@
-package com.myresume.librarymanagementsystem.member.repository;
+package com.myresume.librarymanagementsystem.repository;
 
 import com.myresume.librarymanagementsystem.entity.Gender;
 import com.myresume.librarymanagementsystem.entity.Member;
