@@ -3,7 +3,6 @@ package com.myresume.librarymanagementsystem.member.service;
 import com.myresume.librarymanagementsystem.gender.entity.Gender;
 import com.myresume.librarymanagementsystem.member.entity.Member;
 import com.myresume.librarymanagementsystem.member.repository.MemberRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
@@ -26,10 +25,10 @@ class MemberServiceTest {
     @Captor
     private ArgumentCaptor<Member> memberArgumentCaptor;
 
-    @BeforeEach
+    /*@BeforeEach
     void setUp() {
         underTest = new MemberService(memberRepository);
-    }
+    }*/
 
     @Test
     void itShouldSaveNewMember() {
