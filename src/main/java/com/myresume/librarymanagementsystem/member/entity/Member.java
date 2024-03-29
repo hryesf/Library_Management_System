@@ -72,7 +72,7 @@ public class Member {
 
     @Digits(integer = 12,
             fraction = 0,
-            message = "The phone nu,ber is not correct!")
+            message = "The phone number is not correct!")
     @Column(name = "member_mobile",
             columnDefinition = "varchar(20)")
     private String memberMobile;
