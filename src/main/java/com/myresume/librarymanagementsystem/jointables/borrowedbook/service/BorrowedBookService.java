@@ -1,12 +1,12 @@
 package com.myresume.librarymanagementsystem.jointables.borrowedbook.service;
 
-import com.myresume.librarymanagementsystem.book.entity.Book;
-import com.myresume.librarymanagementsystem.book.repository.BookRepository;
+import com.myresume.librarymanagementsystem.entity.Book;
+import com.myresume.librarymanagementsystem.repository.BookRepository;
 import com.myresume.librarymanagementsystem.jointables.borrowedbook.entity.BorrowedBook;
 import com.myresume.librarymanagementsystem.jointables.borrowedbook.entity.BorrowedBookId;
 import com.myresume.librarymanagementsystem.jointables.borrowedbook.repository.BorrowedBookRepository;
-import com.myresume.librarymanagementsystem.member.entity.Member;
-import com.myresume.librarymanagementsystem.member.repository.MemberRepository;
+import com.myresume.librarymanagementsystem.entity.Member;
+import com.myresume.librarymanagementsystem.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

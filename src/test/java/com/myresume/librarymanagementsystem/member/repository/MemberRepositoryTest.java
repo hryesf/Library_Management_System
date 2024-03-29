@@ -1,7 +1,8 @@
 package com.myresume.librarymanagementsystem.member.repository;
 
-import com.myresume.librarymanagementsystem.gender.entity.Gender;
-import com.myresume.librarymanagementsystem.member.entity.Member;
+import com.myresume.librarymanagementsystem.entity.Gender;
+import com.myresume.librarymanagementsystem.entity.Member;
+import com.myresume.librarymanagementsystem.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -75,7 +76,7 @@ class MemberRepositoryTest {
         // Then
         assertThatThrownBy(() -> underTest.save(member))
                 .hasMessageContaining(
-                        "not-null property references a null or transient value : com.myresume.librarymanagementsystem.member.entity.Member.mem_lastName")
+                        "not-null property references a null or transient value : com.myresume.librarymanagementsystem.entity.Member.mem_lastName")
                 .isInstanceOf(DataIntegrityViolationException.class);
     }
 
@@ -97,7 +98,7 @@ class MemberRepositoryTest {
         // assertThat(underTest.save(member));
         assertThatThrownBy(() -> underTest.save(member))
                 .hasMessageContaining(
-                        "not-null property references a null or transient value : com.myresume.librarymanagementsystem.member.entity.Member.mem_nationalCode")
+                        "not-null property references a null or transient value : com.myresume.librarymanagementsystem.entity.Member.mem_nationalCode")
                 .isInstanceOf(DataIntegrityViolationException.class);
     }
 }

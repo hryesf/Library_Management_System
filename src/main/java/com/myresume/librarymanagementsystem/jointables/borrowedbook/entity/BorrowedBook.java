@@ -1,7 +1,7 @@
 package com.myresume.librarymanagementsystem.jointables.borrowedbook.entity;
 
-import com.myresume.librarymanagementsystem.book.entity.Book;
-import com.myresume.librarymanagementsystem.member.entity.Member;
+import com.myresume.librarymanagementsystem.entity.Book;
+import com.myresume.librarymanagementsystem.entity.Member;
 import jakarta.persistence.*;
 import lombok.*;
 

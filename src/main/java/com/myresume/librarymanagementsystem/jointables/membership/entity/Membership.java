@@ -1,7 +1,7 @@
 package com.myresume.librarymanagementsystem.jointables.membership.entity;
 
-import com.myresume.librarymanagementsystem.library.entity.Library;
-import com.myresume.librarymanagementsystem.member.entity.Member;
+import com.myresume.librarymanagementsystem.entity.Library;
+import com.myresume.librarymanagementsystem.entity.Member;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

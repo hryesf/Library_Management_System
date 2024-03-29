@@ -3,10 +3,10 @@ package com.myresume.librarymanagementsystem.jointables.membership.service;
 import com.myresume.librarymanagementsystem.jointables.membership.entity.Membership;
 import com.myresume.librarymanagementsystem.jointables.membership.entity.MembershipId;
 import com.myresume.librarymanagementsystem.jointables.membership.repository.MembershipRepository;
-import com.myresume.librarymanagementsystem.library.entity.Library;
-import com.myresume.librarymanagementsystem.library.repository.LibraryRepository;
-import com.myresume.librarymanagementsystem.member.entity.Member;
-import com.myresume.librarymanagementsystem.member.repository.MemberRepository;
+import com.myresume.librarymanagementsystem.entity.Library;
+import com.myresume.librarymanagementsystem.repository.LibraryRepository;
+import com.myresume.librarymanagementsystem.entity.Member;
+import com.myresume.librarymanagementsystem.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

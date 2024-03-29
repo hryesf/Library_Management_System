@@ -1,12 +1,12 @@
 package com.myresume.librarymanagementsystem.jointables.donatedbook.service;
 
-import com.myresume.librarymanagementsystem.book.entity.Book;
-import com.myresume.librarymanagementsystem.book.repository.BookRepository;
+import com.myresume.librarymanagementsystem.entity.Book;
+import com.myresume.librarymanagementsystem.repository.BookRepository;
 import com.myresume.librarymanagementsystem.jointables.donatedbook.entity.DonatedBook;
 import com.myresume.librarymanagementsystem.jointables.donatedbook.entity.DonatedBookId;
 import com.myresume.librarymanagementsystem.jointables.donatedbook.repository.DonatedBookRepository;
-import com.myresume.librarymanagementsystem.library.entity.Library;
-import com.myresume.librarymanagementsystem.library.repository.LibraryRepository;
+import com.myresume.librarymanagementsystem.entity.Library;
+import com.myresume.librarymanagementsystem.repository.LibraryRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
