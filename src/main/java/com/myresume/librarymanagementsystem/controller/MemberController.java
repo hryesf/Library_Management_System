@@ -1,8 +1,8 @@
 package com.myresume.librarymanagementsystem.controller;
 
 import com.myresume.librarymanagementsystem.entity.Member;
-import com.myresume.librarymanagementsystem.service.MemberConverter;
-import com.myresume.librarymanagementsystem.service.MemberDTO;
+import com.myresume.librarymanagementsystem.dto.MemberConverter;
+import com.myresume.librarymanagementsystem.dto.MemberDTO;
 import com.myresume.librarymanagementsystem.service.MemberService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;

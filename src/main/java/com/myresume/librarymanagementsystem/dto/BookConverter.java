@@ -1,4 +1,4 @@
-package com.myresume.librarymanagementsystem.service;
+package com.myresume.librarymanagementsystem.dto;
 
 import com.myresume.librarymanagementsystem.entity.Book;
 import org.springframework.stereotype.Component;

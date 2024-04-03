@@ -1,5 +1,7 @@
 package com.myresume.librarymanagementsystem.service;
 
+import com.myresume.librarymanagementsystem.dto.BookConverter;
+import com.myresume.librarymanagementsystem.dto.BookDTO;
 import com.myresume.librarymanagementsystem.entity.Book;
 import com.myresume.librarymanagementsystem.repository.BookRepository;
 import com.myresume.librarymanagementsystem.exception.NotFoundException;

@@ -1,4 +1,4 @@
-package com.myresume.librarymanagementsystem.service;
+package com.myresume.librarymanagementsystem.dto;
 
 import lombok.Data;
 
